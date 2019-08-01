@@ -9,9 +9,9 @@ using TestDB;
 
 namespace TestDB.Migrations
 {
-    [DbContext(typeof(ReactBdNewContext))]
-    [Migration("20190731193358_Postgres")]
-    partial class Postgres
+    [DbContext(typeof(reactBdNewContext))]
+    [Migration("20190801104257_viktordb3")]
+    partial class viktordb3
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -23,8 +23,7 @@ namespace TestDB.Migrations
 
             modelBuilder.Entity("TestDB.AspNetRoleClaims", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
+                    b.Property<string>("Id");
 
                     b.Property<string>("ClaimType");
 
@@ -57,15 +56,14 @@ namespace TestDB.Migrations
                     b.HasIndex("NormalizedName")
                         .IsUnique()
                         .HasName("RoleNameIndex")
-                        .HasFilter("([NormalizedName] IS NOT NULL)");
+                        .HasFilter("(\"NormalizedName\" IS NOT NULL)");
 
                     b.ToTable("AspNetRoles");
                 });
 
             modelBuilder.Entity("TestDB.AspNetUserClaims", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
+                    b.Property<string>("Id");
 
                     b.Property<string>("ClaimType");
 
@@ -188,7 +186,7 @@ namespace TestDB.Migrations
                     b.HasIndex("NormalizedUserName")
                         .IsUnique()
                         .HasName("UserNameIndex")
-                        .HasFilter("([NormalizedUserName] IS NOT NULL)");
+                        .HasFilter("(\"NormalizedUserName\" IS NOT NULL)");
 
                     b.ToTable("AspNetUsers");
                 });

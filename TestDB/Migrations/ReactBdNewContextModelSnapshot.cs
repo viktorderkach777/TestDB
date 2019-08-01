@@ -8,12 +8,12 @@ using TestDB;
 
 namespace TestDB.Migrations
 {
-    [DbContext(typeof(ReactBdNewContext))]
-    partial class ReactBdNewContextModelSnapshot : ModelSnapshot
+    [DbContext(typeof(reactBdNewContext))]
+    partial class reactBdNewContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
         {
-//#pragma warning disable 612, 618
+#pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn)
                 .HasAnnotation("ProductVersion", "2.2.6-servicing-10079")
@@ -21,8 +21,7 @@ namespace TestDB.Migrations
 
             modelBuilder.Entity("TestDB.AspNetRoleClaims", b =>
                 {
-                    b.Property<string>("Id")
-                        .ValueGeneratedOnAdd();
+                    b.Property<string>("Id");
 
                     b.Property<string>("ClaimType");
 
@@ -53,17 +52,16 @@ namespace TestDB.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("NormalizedName")
-                        //.IsUnique()
+                        .IsUnique()
                         .HasName("RoleNameIndex")
-                        .HasFilter("([NormalizedName] IS NOT NULL)");
+                        .HasFilter("(\"NormalizedName\" IS NOT NULL)");
 
                     b.ToTable("AspNetRoles");
                 });
 
             modelBuilder.Entity("TestDB.AspNetUserClaims", b =>
                 {
-                    b.Property<string>("Id")
-                        .ValueGeneratedOnAdd();
+                    b.Property<string>("Id");
 
                     b.Property<string>("ClaimType");
 
@@ -184,9 +182,9 @@ namespace TestDB.Migrations
                         .HasName("EmailIndex");
 
                     b.HasIndex("NormalizedUserName")
-                        //.IsUnique()
+                        .IsUnique()
                         .HasName("UserNameIndex")
-                        .HasFilter("([NormalizedUserName] IS NOT NULL)");
+                        .HasFilter("(\"NormalizedUserName\" IS NOT NULL)");
 
                     b.ToTable("AspNetUsers");
                 });
@@ -489,7 +487,7 @@ namespace TestDB.Migrations
                         .HasForeignKey("HotelId")
                         .HasConstraintName("FK_Tours_Hotels");
                 });
-//#pragma warning restore 612, 618
+#pragma warning restore 612, 618
         }
     }
 }

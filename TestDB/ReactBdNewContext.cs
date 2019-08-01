@@ -4,13 +4,13 @@ using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace TestDB
 {
-    public partial class ReactBdNewContext : DbContext
+    public partial class reactBdNewContext : DbContext
     {
-        public ReactBdNewContext()
+        public reactBdNewContext()
         {
         }
 
-        public ReactBdNewContext(DbContextOptions<ReactBdNewContext> options)
+        public reactBdNewContext(DbContextOptions<reactBdNewContext> options)
             : base(options)
         {
         }
@@ -36,8 +36,10 @@ namespace TestDB
         {
             if (!optionsBuilder.IsConfigured)
             {
-//#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-                optionsBuilder.UseNpgsql("Server=35.242.196.40;Port=5432;Database=toursdb;User Id=admin;Password=password;");
+                //#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
+                //optionsBuilder.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=reactBdNew;Trusted_Connection=True;");
+                //UseNpgsql
+                optionsBuilder.UseNpgsql("Server=35.242.196.40;Port=5432;Database=viktordb;User Id=admin;Password=password;");
             }
         }
 
@@ -48,6 +50,8 @@ namespace TestDB
             modelBuilder.Entity<AspNetRoleClaims>(entity =>
             {
                 entity.HasIndex(e => e.RoleId);
+
+                entity.Property(e => e.Id).ValueGeneratedNever();
 
                 entity.Property(e => e.RoleId).IsRequired();
 
@@ -61,7 +65,7 @@ namespace TestDB
                 entity.HasIndex(e => e.NormalizedName)
                     .HasName("RoleNameIndex")
                     .IsUnique()
-                    .HasFilter("([NormalizedName] IS NOT NULL)");
+                    .HasFilter("(\"NormalizedName\" IS NOT NULL)");
 
                 entity.Property(e => e.Id).ValueGeneratedNever();
 
@@ -73,6 +77,8 @@ namespace TestDB
             modelBuilder.Entity<AspNetUserClaims>(entity =>
             {
                 entity.HasIndex(e => e.UserId);
+
+                entity.Property(e => e.Id).ValueGeneratedNever();
 
                 entity.Property(e => e.UserId).IsRequired();
 
@@ -134,7 +140,7 @@ namespace TestDB
                 entity.HasIndex(e => e.NormalizedUserName)
                     .HasName("UserNameIndex")
                     .IsUnique()
-                    .HasFilter("([NormalizedUserName] IS NOT NULL)");
+                    .HasFilter("(\"NormalizedUserName\" IS NOT NULL)");
 
                 entity.Property(e => e.Id).ValueGeneratedNever();
 
